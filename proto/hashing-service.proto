@@ -1,0 +1,27 @@
+// COMPILE: protoc --proto_path=proto --proto_path=third_party --go_out=plugins=grpc:proto hashing-service.proto
+
+syntax = "proto3";
+
+// The name that will be used inside the code to call the service and messages
+package proto;
+
+message HashingEncodeRequest {
+    string plainText = 1;
+}
+
+message HashingEncodeResponse {
+    string hashedText = 1;
+}
+
+message HashingDecodeRequest {
+    string hashedText = 1;
+}
+
+message HashingDecodeResponse {
+    string plainText = 1;
+}
+
+service HashingService {
+    rpc Encode(HashingEncodeRequest) returns (HashingEncodeResponse);
+    rpc Decode(HashingDecodeRequest) returns (HashingDecodeResponse);
+}

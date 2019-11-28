@@ -1,0 +1,20 @@
+// COMPILE: protoc --proto_path=proto --proto_path=third_party --go_out=plugins=grpc:proto calculation-service.proto
+
+syntax = "proto3";
+
+// The name that will be used inside the code to call the service and messages
+package proto;
+
+message CalculationRequest {
+    int64 a = 1;
+    int64 b = 2;
+}
+
+message CalculationResponse {
+    int64 result = 1;
+}
+
+service CalculationService {
+    rpc Add (CalculationRequest) returns (CalculationResponse);
+    rpc Multiply (CalculationRequest) returns (CalculationResponse);
+}
